@@ -34,9 +34,6 @@ const Dummy_Expenses = [
 
 
 
-
-
-
 const App = () => {
 
  const [expenses, setExpenses]= useState(Dummy_Expenses)
@@ -45,14 +42,14 @@ const App = () => {
     setExpenses(prevExpenses => {
       return [expense, ...prevExpenses]
     });
-    console.log(expense)
+    
   }
 
   
   return (
     <div>
      <NewExpense onAddExpense={addExpense}/>
-      <NewExpenses  items={expenses}  />
+      <NewExpenses  items={expenses}/>
      
       
        {/* <NewExpenses 

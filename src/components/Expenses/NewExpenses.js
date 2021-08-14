@@ -1,17 +1,25 @@
 import {useState} from 'react'
-import ExpenseItem from "./ExpenseItem"
 import "./NewExpenses.css"
 import Card from "./UI/Card"
 import ExpenseFilter from "./ExpenseFilter"
+import NewExpensesList from './NewExpensesList'
+
 
 const NewExpenses = (props) => {
     const[filteredYear, setFilteredYear] = useState('2020')
-        
-    const filterDateHandler = (selectedYear) => {
-            setFilteredYear(selectedYear)      
-        }
 
-       
+    const filterDateHandler = (selectedYear) => {
+        return setFilteredYear(selectedYear)
+    }
+ 
+        
+    const filteredDate = props.items.filter(expense => {
+        return expense.date.getFullYear().toString() === filteredYear
+    })
+
+   
+
+   
 
     return(
        <div>
@@ -21,10 +29,21 @@ const NewExpenses = (props) => {
                 title={props.title}
                 amount={props.amount}
             /> */}
+
+          
             <ExpenseFilter defaultDate={filteredYear} onChangedFilter={filterDateHandler}/>
-            {props.items.map(expense => <ExpenseItem title={expense.title} 
+             <NewExpensesList items={filteredDate}/>
+            
+            {/* <NewExpenseList items= {filteredDate}/> */}
+            {/* filtering content by conditions */}
+            {/* {filterDate.length === 0 ? <p>No content is available</p> :filteredDate.map(expense => <ExpenseItem key={expense.id} title={expense.title} 
+            amount={expense.amount} 
+            date={expense.date}/>)} */}
+             {/* {filteredDate.length === 0 && <p>No content is avaliable</p> } */}
+            {/* {filteredDate.length > 0 && filteredDate.map(expense => <ExpenseItem key={expense.id} title={expense.title} 
             amount={expense.amount} 
             date={expense.date}/>)}
+            */}
             {/* <ExpenseItem 
             title={props.items[0].title} 
             date={props.items[0].date} 
